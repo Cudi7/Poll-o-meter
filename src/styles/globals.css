@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body {
+    @apply bg-gradient-to-b  from-[#2e026d] to-[#15162c] min-h-[100vh]
+}
