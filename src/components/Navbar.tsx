@@ -161,7 +161,7 @@ export default function Navbar() {
                   Show me some love{" "}
                   {sessionData ? (
                     <a
-                      href="https://github.com/Cudi7"
+                      href="#"
                       className="text-indigo-600 hover:text-indigo-500"
                     >
                       <svg
@@ -181,7 +181,7 @@ export default function Navbar() {
                     </a>
                   ) : null}
                   <a
-                    href="https://www.linkedin.com/in/cudi7/"
+                    href="https://github.com/Cudi7"
                     className="text-indigo-600 hover:text-indigo-500"
                   >
                     <svg
@@ -196,7 +196,10 @@ export default function Navbar() {
                       />
                     </svg>
                   </a>
-                  <a href="#" className="text-indigo-600 hover:text-indigo-500">
+                  <a
+                    href="https://www.linkedin.com/in/cudi7/"
+                    className="text-indigo-600 hover:text-indigo-500"
+                  >
                     <svg
                       aria-hidden="true"
                       focusable="false"
