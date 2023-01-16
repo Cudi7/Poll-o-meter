@@ -136,12 +136,12 @@ export default function Navbar() {
                   Polls
                 </Link>
 
-                <Link
+                {/* <Link
                   href="/about"
                   className="text-base font-medium text-gray-900 hover:text-gray-700"
                 >
                   About Me
-                </Link>
+                </Link> */}
 
                 <a
                   href="#"
@@ -161,7 +161,7 @@ export default function Navbar() {
                   Show me some love{" "}
                   {sessionData ? (
                     <a
-                      href="#"
+                      href="https://github.com/Cudi7"
                       className="text-indigo-600 hover:text-indigo-500"
                     >
                       <svg
@@ -180,7 +180,10 @@ export default function Navbar() {
                       </svg>
                     </a>
                   ) : null}
-                  <a href="#" className="text-indigo-600 hover:text-indigo-500">
+                  <a
+                    href="https://www.linkedin.com/in/cudi7/"
+                    className="text-indigo-600 hover:text-indigo-500"
+                  >
                     <svg
                       viewBox="0 0 24 24"
                       aria-hidden="true"
