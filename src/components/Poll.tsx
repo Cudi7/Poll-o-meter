@@ -84,7 +84,7 @@ const Poll = ({ pollData, ip }: PollProps) => {
   }, [isCustomId, pollData?.votes]);
 
   const copyLink = () => {
-    const base = "http://localhost:3000/polls/";
+    const base = "https://poll-o-meter.vercel.app/polls/";
     navigator.clipboard.writeText(`${base}${pollData?.id}`);
   };
 

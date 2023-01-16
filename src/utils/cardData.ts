@@ -10,7 +10,7 @@ export const cardData: cardDataInterface[] = [
     // icon: <DocumentCheckIcon />,
   },
   {
-    title: "Discover your temperature ",
+    title: "Discover your temperature (coming soon)",
     // icon: <DocumentMagnifyingGlassIcon />,
   },
 ];
