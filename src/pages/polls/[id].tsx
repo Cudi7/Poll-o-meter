@@ -8,6 +8,7 @@ import { trpc } from "../../utils/trpc";
 const SinglePoll = () => {
   const [currentId, setCurrentId] = useState("");
   const router = useRouter();
+  const ip = "test";
 
   useEffect(() => {
     if (router.query.id) setCurrentId(router.query.id as string);
@@ -19,7 +20,7 @@ const SinglePoll = () => {
     <>
       <Navbar />
       <div className="container mx-auto flex max-w-7xl flex-wrap justify-center">
-        {data && !isLoading ? <Poll pollData={data} /> : <Loader />}
+        {data && !isLoading ? <Poll pollData={data} ip={ip} /> : <Loader />}
       </div>
     </>
   );

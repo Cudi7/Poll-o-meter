@@ -7,6 +7,7 @@ import { useLocalStorage } from "usehooks-ts";
 import { v4 as uuidv4 } from "uuid";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import Loader from "./Loader";
 
 interface PollProps {
   pollData:
@@ -42,8 +43,8 @@ const Poll = ({ pollData, ip }: PollProps) => {
   );
 
   const handleInputChange = (pollId: string, answerId: string) => {
-    // const pollId = e.target.name;
-    // const answerId = e.target.value;
+    if (userHasAlreadyVoted) return;
+
     const userIp = ip as string;
 
     const userId = sessionData?.user?.id
@@ -52,18 +53,12 @@ const Poll = ({ pollData, ip }: PollProps) => {
       ? isCustomId
       : handleNewId();
 
-    console.log("hay usuario registrado?");
-    console.log("su id en sistema es: " + sessionData?.user?.id);
-    console.log("su id en aplicacion para BD es: " + userId);
-
     const data: NewVote = { pollId, answerId, userIp, userId };
 
-    console.table(data);
-
-    console.table(data);
     mutation.mutate(data, {
       onSuccess() {
         utils.poll.getAll.invalidate();
+        utils.poll.getOne.invalidate();
       },
     });
   };
@@ -92,17 +87,10 @@ const Poll = ({ pollData, ip }: PollProps) => {
       : false;
   }, [isCustomId, pollData?.votes]);
 
-  console.log("ya he votado? " + userHasAlreadyVoted);
-  console.log("estos son los votos...");
-  pollData?.votes.forEach((el) => console.log(el.userId + isCustomId));
-
   const userIdVote: string | undefined = useMemo(() => {
     return pollData?.votes.filter((el) => el.userId === isCustomId)[0]
       ?.answerId;
   }, [isCustomId, pollData?.votes]);
-
-  console.log(userIdVote + " this is the user id vote inside pollData (votes)");
-  console.log("this is my current Id: " + isCustomId);
 
   const copyLink = () => {
     const base = "https://poll-o-meter.vercel.app/polls/";
@@ -181,7 +169,9 @@ const Poll = ({ pollData, ip }: PollProps) => {
                   </div>
                 </li>
               ))}
+              {mutation.isLoading ? <Loader /> : null}
             </ul>
+
             <div className="flex flex-wrap justify-between gap-5  text-slate-500">
               <a
                 href="#"

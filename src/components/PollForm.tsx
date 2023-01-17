@@ -47,7 +47,7 @@ const PollForm = ({ onStart }: Props) => {
   };
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
-    if (questionInputValue && !displayOptions) displayQuestions();
+    if (e.target.value && !displayOptions) displayQuestions();
 
     const allInputsHaveLength = incrementAnswerInput(getFilteredValues(e));
 
