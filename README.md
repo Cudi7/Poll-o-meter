@@ -1,8 +1,8 @@
-# Create T3 App
+# Poll-o-meter
 
 This is an app bootstrapped according to the [init.tips](https://init.tips) stack, also known as the T3-Stack.
 
-LIVE DEMO:
+LIVE DEMO: https://poll-o-meter.vercel.app/
 
 ## What are the different technologies used?
 
