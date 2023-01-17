@@ -36,17 +36,31 @@ const Poll = ({ pollData, ip }: PollProps) => {
   const utils = trpc.useContext();
   const router = useRouter();
 
-  const [isCustomId, setIsCustomId] = useLocalStorage("poll-o-meter-id", "");
+  const [isCustomId, setIsCustomId] = useLocalStorage(
+    "poll-o-meter-id",
+    sessionData?.user?.id ? sessionData?.user?.id : ""
+  );
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const pollId = e.target.name;
     const answerId = e.target.value;
     const userIp = ip as string;
-    const userId =
-      sessionData?.user?.id || isCustomId.length ? isCustomId : handleNewId();
+
+    const userId = sessionData?.user?.id
+      ? sessionData?.user?.id
+      : isCustomId.length
+      ? isCustomId
+      : handleNewId();
+
+    console.log("hay usuario registrado?");
+    console.log("su id en sistema es: " + sessionData?.user?.id);
+    console.log("su id en aplicacion para BD es: " + userId);
 
     const data: NewVote = { pollId, answerId, userIp, userId };
 
+    console.table(data);
+
+    console.table(data);
     mutation.mutate(data, {
       onSuccess() {
         utils.poll.getAll.invalidate();
@@ -78,10 +92,17 @@ const Poll = ({ pollData, ip }: PollProps) => {
       : false;
   }, [isCustomId, pollData?.votes]);
 
+  console.log("ya he votado? " + userHasAlreadyVoted);
+  console.log("estos son los votos...");
+  pollData?.votes.forEach((el) => console.log(el.userId + isCustomId));
+
   const userIdVote: string | undefined = useMemo(() => {
     return pollData?.votes.filter((el) => el.userId === isCustomId)[0]
       ?.answerId;
   }, [isCustomId, pollData?.votes]);
+
+  console.log(userIdVote + " this is the user id vote inside pollData (votes)");
+  console.log("this is my current Id: " + isCustomId);
 
   const copyLink = () => {
     const base = "https://poll-o-meter.vercel.app/polls/";
