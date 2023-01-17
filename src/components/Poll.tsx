@@ -41,9 +41,9 @@ const Poll = ({ pollData, ip }: PollProps) => {
     sessionData?.user?.id ? sessionData?.user?.id : ""
   );
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const pollId = e.target.name;
-    const answerId = e.target.value;
+  const handleInputChange = (pollId: string, answerId: string) => {
+    // const pollId = e.target.name;
+    // const answerId = e.target.value;
     const userIp = ip as string;
 
     const userId = sessionData?.user?.id
@@ -146,7 +146,11 @@ const Poll = ({ pollData, ip }: PollProps) => {
             </p>
             <ul className="my-4 space-y-3">
               {pollData?.answer.map((el) => (
-                <li key={el.id} id={el.id}>
+                <li
+                  key={el.id}
+                  id={el.id}
+                  onClick={() => handleInputChange(el.pollId, el.id)}
+                >
                   <div
                     className={` ${
                       userHasAlreadyVoted
@@ -166,20 +170,11 @@ const Poll = ({ pollData, ip }: PollProps) => {
                     <input
                       type="radio"
                       name={el.pollId}
-                      onChange={handleInputChange}
+                      // onChange={handleInputChange}
                       value={el.id}
                       disabled={userHasAlreadyVoted}
                     />
-                    <span
-                      className={`ml-3 flex-1     `}
-                      // style={{
-                      //   backgroundSize: `${Math.round(
-                      //     handleVotesNumber(el.id)
-                      //   )}% 10%`,
-                      // }}
-                    >
-                      {el.title}
-                    </span>
+                    <span className={`ml-3 flex-1     `}>{el.title}</span>
                     <span className="ml-3 inline-flex items-center justify-center rounded bg-red-200 px-2 py-0.5 text-xs font-medium text-gray-500 dark:bg-gray-700 dark:text-gray-400">
                       {Math.round(handleVotesNumber(el.id))}%
                     </span>
